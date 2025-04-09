@@ -1,35 +1,27 @@
-SELECT *
-    FROM `sql-portfolio-403505.trip_data.202101-divvy-tripdata`
-    UNION ALL
-    SELECT *
-    FROM `sql-portfolio-403505.trip_data.202102-divvy-tripdata`
-    UNION ALL
-    SELECT *
-    FROM `sql-portfolio-403505.trip_data.202103-divvy-tripdata`
-    UNION ALL
-    SELECT *
-    FROM `sql-portfolio-403505.trip_data.202104-divvy-tripdata`
-    UNION ALL
-    SELECT *
-    FROM `sql-portfolio-403505.trip_data.202105-divvy-tripdata`
-    UNION ALL
-    SELECT *
-    FROM `sql-portfolio-403505.trip_data.202106-divvy-tripdata`
-    UNION ALL
-    SELECT *
-    FROM `sql-portfolio-403505.trip_data.202107-divvy-tripdata`
-    UNION ALL
-    SELECT *
-    FROM `sql-portfolio-403505.trip_data.202108-divvy-tripdata`
-    UNION ALL
-    SELECT *
-    FROM `sql-portfolio-403505.trip_data.202109-divvy-tripdata`
-    UNION ALL
-    SELECT *
-    FROM `sql-portfolio-403505.trip_data.202110-divvy-tripdata`
-    UNION ALL
-    SELECT *
-    FROM `sql-portfolio-403505.trip_data.202111-divvy-tripdata`
-    UNION ALL
-    SELECT *
-    FROM `sql-portfolio-403505.trip_data.202112-divvy-tripdata`
+# this code reads and writes the 12 individual csv files into one csv file for further analysis
+
+import pandas as pd
+import glob
+import os
+
+# specify the directory to read files from
+directory = '/content/drive/MyDrive/School/capstone/2022_trip_data/'
+
+# Use glob to get a list of all CSV files in the directory
+all_files = glob.glob(os.path.join(directory, "*.csv"))
+
+# Create an empty list to store dataframes
+all_df = []
+
+# Iterate through the list of files
+for f in all_files:
+    # Read each CSV file into a dataframe
+    df = pd.read_csv(f)
+    # Append the dataframe to the list
+    all_df.append(df)
+
+# Concatenate all dataframes in the list into a single dataframe
+merged_df = pd.concat(all_df, ignore_index=True)
+
+# Save the merged dataframe to a new CSV file
+merged_df.to_csv("/content/drive/MyDrive/School/capstone/2022_trip_data/merged_file.csv", index=False)
