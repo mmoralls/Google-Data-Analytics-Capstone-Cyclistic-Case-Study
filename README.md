@@ -1,3 +1,5 @@
+Note: I decided to perform my capstone in Python rather than SQL and R as the platform was easier to work with and still end up with the same results.
+
 Google Data Analytics Capstone: Cyclistic Case Study
 
 Course: Google Data Analytics Capstone: Complete a Case Study
